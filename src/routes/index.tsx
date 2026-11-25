@@ -18,24 +18,62 @@ import {
   formatPublishedDate,
   type NewsCategory,
 } from "@/lib/fishing-news";
+import { HERO_IMAGE_URL, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
+
+const PAGE_TITLE = `${SITE_NAME} — Notícias de Pesca em um só lugar`;
+const CANONICAL_URL = `${SITE_URL}/`;
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(fishingNewsQueryOptions),
   head: () => ({
     meta: [
-      { title: "Radar da Pesca — Notícias de Pesca em um só lugar" },
-      {
-        name: "description",
-        content: "Acompanhe as últimas notícias de pesca esportiva, rios, mar e defeso reunidas em um só lugar.",
-      },
-      { property: "og:title", content: "Radar da Pesca — Notícias de Pesca em um só lugar" },
-      {
-        property: "og:description",
-        content: "Acompanhe as últimas notícias de pesca esportiva, rios, mar e defeso reunidas em um só lugar.",
-      },
+      { title: PAGE_TITLE },
+      { name: "description", content: SITE_DESCRIPTION },
+      { property: "og:title", content: PAGE_TITLE },
+      { property: "og:description", content: SITE_DESCRIPTION },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: CANONICAL_URL },
+      { property: "og:site_name", content: SITE_NAME },
+      { property: "og:locale", content: "pt_BR" },
+      { property: "og:image", content: HERO_IMAGE_URL },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: PAGE_TITLE },
+      { name: "twitter:description", content: SITE_DESCRIPTION },
+      { name: "twitter:image", content: HERO_IMAGE_URL },
+      {
+        "script:ld+json": {
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "NewsMediaOrganization",
+              "@id": `${SITE_URL}/#organizacao`,
+              name: SITE_NAME,
+              url: SITE_URL,
+              description: SITE_DESCRIPTION,
+            },
+            {
+              "@type": "WebSite",
+              "@id": `${SITE_URL}/#site`,
+              url: SITE_URL,
+              name: SITE_NAME,
+              description: SITE_DESCRIPTION,
+              inLanguage: "pt-BR",
+              publisher: { "@id": `${SITE_URL}/#organizacao` },
+            },
+            {
+              "@type": "CollectionPage",
+              "@id": `${SITE_URL}/#pagina`,
+              url: CANONICAL_URL,
+              name: PAGE_TITLE,
+              description: SITE_DESCRIPTION,
+              inLanguage: "pt-BR",
+              isPartOf: { "@id": `${SITE_URL}/#site` },
+            },
+          ],
+        },
+      },
     ],
+    links: [{ rel: "canonical", href: CANONICAL_URL }],
   }),
   component: RadarDaPescaHome,
 });
