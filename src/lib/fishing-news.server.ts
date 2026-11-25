@@ -321,7 +321,7 @@ export async function fetchFishingNews(): Promise<FishingNewsResponse> {
   }
 
   return {
-    articles: prioritized.slice(0, 42),
+    articles: prioritized.slice(0, 60),
     fetchedAt: new Date().toISOString(),
     isLive: true,
   };

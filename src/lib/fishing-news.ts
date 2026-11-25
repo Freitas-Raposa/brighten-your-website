@@ -48,6 +48,27 @@ export function prioritizeArticles<T extends { category: string; publishedAt: st
 }
 
 export const AUTO_REFRESH_INTERVAL_MS = 5 * 60 * 1000;
+export const RECENT_NEWS_DAYS = 3;
+
+export function splitRecentAndArchivedArticles<T extends { publishedAt: string }>(
+  articles: T[],
+  nowMs: number = Date.now(),
+): { recent: T[]; archived: T[] } {
+  const cutoffMs = nowMs - RECENT_NEWS_DAYS * 24 * 60 * 60 * 1000;
+  const recent: T[] = [];
+  const archived: T[] = [];
+
+  for (const article of articles) {
+    const time = new Date(article.publishedAt).getTime();
+    if (Number.isNaN(time) || time >= cutoffMs) {
+      recent.push(article);
+    } else {
+      archived.push(article);
+    }
+  }
+
+  return { recent, archived };
+}
 
 export const fishingNewsQueryOptions = queryOptions({
   queryKey: ["fishing-news"],

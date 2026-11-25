@@ -2,8 +2,10 @@ import { describe, expect, it } from "vitest";
 import {
   AUTO_REFRESH_INTERVAL_MS,
   CATEGORY_ORDER,
+  RECENT_NEWS_DAYS,
   fishingNewsQueryOptions,
   prioritizeArticles,
+  splitRecentAndArchivedArticles,
 } from "@/lib/fishing-news";
 import { classifyCategory, RSS_FEEDS } from "@/lib/fishing-news.server";
 
@@ -43,5 +45,20 @@ describe("Radar da Pesca — atualização automática, Maranhão e portarias", 
     expect(classifyCategory("Como pedir reativação da carteira de pescador RGP no PesqBrasil")).toBe("seguro_defeso");
     expect(classifyCategory("Ministério da Pesca publica nova portaria sobre defeso")).toBe("legislacao");
     expect(classifyCategory("Relatório da FAO analisa pesca mundial")).toBe("mundo");
+  });
+
+  it("separa notícias dos últimos 3 dias na capa e envia as mais antigas para o arquivo", () => {
+    expect(RECENT_NEWS_DAYS).toBe(3);
+    const now = new Date("2026-11-25T12:00:00.000Z").getTime();
+    const { recent, archived } = splitRecentAndArchivedArticles(
+      [
+        { id: "hoje", publishedAt: "2026-11-25T10:00:00.000Z" },
+        { id: "dois-dias", publishedAt: "2026-11-23T12:00:00.000Z" },
+        { id: "quatro-dias", publishedAt: "2026-11-21T11:00:00.000Z" },
+      ],
+      now,
+    );
+    expect(recent.map((a) => a.id)).toEqual(["hoje", "dois-dias"]);
+    expect(archived.map((a) => a.id)).toEqual(["quatro-dias"]);
   });
 });

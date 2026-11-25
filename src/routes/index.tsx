@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { createFileRoute } from "@tanstack/react-router";
-import { ArrowUpRight, RefreshCw, Search } from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowUpRight, History, RefreshCw, Search } from "lucide-react";
 import heroImage from "@/assets/radar-pesca-hero.jpg";
 import {
   ADVERTISE_WHATSAPP_URL,
@@ -16,9 +16,11 @@ import { DefesoRgpGuide } from "@/components/DefesoRgpGuide";
 import {
   CATEGORY_LABELS,
   CATEGORY_ORDER,
+  RECENT_NEWS_DAYS,
   fishingNewsQueryOptions,
   formatPublishedDate,
   prioritizeArticles,
+  splitRecentAndArchivedArticles,
   type NewsCategory,
 } from "@/lib/fishing-news";
 import { HERO_IMAGE_URL, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
@@ -87,9 +89,11 @@ function RadarDaPescaHome() {
   const [selectedCategory, setSelectedCategory] = useState<NewsCategory>("todas");
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredArticles = useMemo(() => {
+  const { recentArticles, archivedCount } = useMemo(() => {
+    const { recent, archived } = splitRecentAndArchivedArticles(data.articles);
+    const pool = recent.length > 0 ? recent : data.articles;
     const query = searchTerm.trim().toLowerCase();
-    const filtered = data.articles.filter((article) => {
+    const filtered = pool.filter((article) => {
       const matchesCategory =
         selectedCategory === "todas" || article.category === selectedCategory;
       const matchesQuery =
@@ -99,11 +103,14 @@ function RadarDaPescaHome() {
         article.source.toLowerCase().includes(query);
       return matchesCategory && matchesQuery;
     });
-    return prioritizeArticles(filtered);
+    return {
+      recentArticles: prioritizeArticles(filtered),
+      archivedCount: archived.length,
+    };
   }, [data.articles, selectedCategory, searchTerm]);
 
-  const featured = filteredArticles[0];
-  const restArticles = filteredArticles.slice(1);
+  const featured = recentArticles[0];
+  const restArticles = recentArticles.slice(1);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -248,7 +255,8 @@ function RadarDaPescaHome() {
                     {selectedCategory === "todas" ? "Maranhão, Brasil e Mundo" : CATEGORY_LABELS[selectedCategory]}
                   </h2>
                   <span className="text-xs text-muted-foreground">
-                    {filteredArticles.length} {filteredArticles.length === 1 ? "notícia" : "notícias"}
+                    Últimos {RECENT_NEWS_DAYS} dias • {recentArticles.length}{" "}
+                    {recentArticles.length === 1 ? "notícia" : "notícias"}
                   </span>
                 </div>
 
@@ -335,12 +343,31 @@ function RadarDaPescaHome() {
             onFilterSeguroDefeso={() => setSelectedCategory("seguro_defeso")}
           />
         )}
+
+        <section aria-label="Arquivo de notícias anteriores" className="mt-10 flex flex-col items-start justify-between gap-4 rounded-2xl border border-border bg-card p-6 sm:flex-row sm:items-center">
+          <div>
+            <h2 className="text-lg font-bold text-card-foreground">Notícias anteriores</h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              A página inicial mostra as atualizações dos últimos {RECENT_NEWS_DAYS} dias. Acesse aqui as matérias que ficaram para trás.
+            </p>
+          </div>
+          <Link
+            to="/arquivo"
+            className="inline-flex shrink-0 items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+          >
+            <History className="h-4 w-4" />
+            Ver notícias anteriores{archivedCount > 0 ? ` (${archivedCount})` : ""}
+          </Link>
+        </section>
       </main>
 
       <footer className="mt-12 border-t border-border bg-muted/40">
         <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-3 px-4 py-6 pb-20 text-xs text-muted-foreground sm:flex-row sm:items-center sm:px-6 sm:pb-6 lg:px-8">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
             <p className="font-medium text-foreground">Radar da Pesca</p>
+            <Link to="/arquivo" className="font-medium text-primary hover:underline">
+              Notícias anteriores
+            </Link>
             <a
               href={AQUACADASTRO_URL}
               target="_blank"
