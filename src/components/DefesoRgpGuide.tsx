@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 
 const DEFESO_PERIODS = [
@@ -60,18 +61,16 @@ export function DefesoRgpGuide({ onFilterCongresso, onFilterSeguroDefeso }: Defe
               ))}
             </ul>
             <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-              Normas básicas: RGP ativo há pelo menos 1 ano, pesca artesanal exclusiva e não receber outro benefício do INSS. Datas podem mudar conforme portaria anual.
+              Normas básicas: RGP ativo há pelo menos 1 ano, REAP em dia, CadÚnico, biometria e conta Gov.br prata ou ouro. Prazo do pedido: de 30 dias antes até 90 dias depois do início do defeso.
             </p>
           </div>
-          <a
-            href="https://www.gov.br/pt-br/servicos/solicitar-seguro-desemprego-do-pescador-artesanal"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to="/guia/seguro-defeso-maranhao"
             className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
           >
-            Ver normas oficiais no Gov.br
+            Ler guia completo do Seguro-Defeso no MA
             <ArrowUpRight className="h-4 w-4" />
-          </a>
+          </Link>
         </div>
 
         <div className="flex flex-col justify-between rounded-xl border border-border bg-card p-5">
@@ -80,31 +79,29 @@ export function DefesoRgpGuide({ onFilterCongresso, onFilterSeguroDefeso }: Defe
               Como dar entrada e Carteira RGP
             </h3>
             <ol className="mt-3 list-decimal space-y-2 pl-4 text-sm text-muted-foreground">
-              <li>Confira se sua carteira do RGP está ativa no PesqBrasil.</li>
-              <li>Separe RG, CPF, comprovante de residência e comprovante de pesca.</li>
-              <li>Peça o benefício pelo Meu INSS, telefone 135 ou na sua colônia, sindicato ou associação.</li>
-              <li>Carteira suspensa ou cancelada? Solicite revisão e reativação direto no portal do MPA.</li>
+              <li>Confira se seu RGP está ativo e com o REAP em dia no PesqBrasil.</li>
+              <li>Tenha CadÚnico atualizado, biometria e conta Gov.br (prata ou ouro).</li>
+              <li>Desde nov/2025, peça pela Carteira de Trabalho Digital ou Portal Emprega Brasil (MTE) — ou com apoio da sua colônia, sindicato ou associação.</li>
+              <li>Carteira suspensa? Solicite revisão e reativação direto no portal do MPA.</li>
             </ol>
           </div>
           <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2">
             <a
-              href="https://meu.inss.gov.br"
+              href="https://www.gov.br/pt-br/servicos/solicitar-seguro-defeso-pescador-artesanal"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
             >
-              Dar entrada no Meu INSS
+              Dar entrada pelo MTE (Gov.br)
               <ArrowUpRight className="h-4 w-4" />
             </a>
-            <a
-              href="https://www.gov.br/mpa/pt-br/assuntos/pesca/registro-geral-da-atividade-pesqueira-rgp"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/guia/rgp-suspenso-reativacao"
               className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
             >
-              Suspensão e reativação do RGP
+              Guia: RGP suspenso e reativação
               <ArrowUpRight className="h-4 w-4" />
-            </a>
+            </Link>
           </div>
         </div>
 
