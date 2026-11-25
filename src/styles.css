@@ -76,6 +76,12 @@
   --color-sunset-foreground: var(--sunset-foreground);
   --color-hero-overlay: var(--hero-overlay);
   --color-hero-foreground: var(--hero-foreground);
+  --color-promo: var(--promo);
+  --color-promo-foreground: var(--promo-foreground);
+  --color-promo-accent: var(--promo-accent);
+  --color-promo-accent-foreground: var(--promo-accent-foreground);
+  --color-whatsapp: var(--whatsapp);
+  --color-whatsapp-foreground: var(--whatsapp-foreground);
 }
 
 :root {
@@ -98,6 +104,12 @@
   --sunset-foreground: oklch(0.99 0.004 85);
   --hero-overlay: oklch(0.16 0.035 225);
   --hero-foreground: oklch(0.985 0.005 85);
+  --promo: oklch(0.27 0.06 172);
+  --promo-foreground: oklch(0.985 0.004 85);
+  --promo-accent: oklch(0.62 0.14 166);
+  --promo-accent-foreground: oklch(0.14 0.03 172);
+  --whatsapp: oklch(0.58 0.165 148);
+  --whatsapp-foreground: oklch(0.99 0.004 85);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
   --border: oklch(0.895 0.012 210);
@@ -151,6 +163,12 @@
   --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+  --promo: oklch(0.24 0.055 172);
+  --promo-foreground: oklch(0.985 0.004 85);
+  --promo-accent: oklch(0.66 0.14 166);
+  --promo-accent-foreground: oklch(0.14 0.03 172);
+  --whatsapp: oklch(0.58 0.165 148);
+  --whatsapp-foreground: oklch(0.99 0.004 85);
 }
 
 @layer base {

@@ -4,6 +4,14 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight, RefreshCw, Search } from "lucide-react";
 import heroImage from "@/assets/radar-pesca-hero.jpg";
 import {
+  AQUACADASTRO_URL,
+  AquaCadastroBanner,
+  AquaCadastroCard,
+  WHATSAPP_DISPLAY,
+  WHATSAPP_URL,
+  WhatsAppFloatingButton,
+} from "@/components/AquaCadastroPromo";
+import {
   CATEGORY_LABELS,
   CATEGORY_ORDER,
   fishingNewsQueryOptions,
@@ -95,6 +103,8 @@ function RadarDaPescaHome() {
           </div>
         </div>
       </header>
+
+      <AquaCadastroBanner />
 
       <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
         <section aria-label="Filtros e busca" className="flex flex-col gap-4 border-b border-border pb-6 md:flex-row md:items-center md:justify-between">
@@ -188,7 +198,39 @@ function RadarDaPescaHome() {
                 </div>
 
                 <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                  {restArticles.map((article) => (
+                  {restArticles.slice(0, 2).map((article) => (
+                    <a
+                      key={article.id}
+                      href={article.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex flex-col justify-between rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/40"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between gap-2 text-xs text-muted-foreground">
+                          <span className="font-semibold text-primary">
+                            {CATEGORY_LABELS[article.category]}
+                          </span>
+                          <span>{formatPublishedDate(article.publishedAt)}</span>
+                        </div>
+                        <h3 className="mt-3 text-lg font-bold leading-snug text-card-foreground transition-colors group-hover:text-primary">
+                          {article.title}
+                        </h3>
+                        <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+                          {article.summary}
+                        </p>
+                      </div>
+
+                      <div className="mt-5 flex items-center justify-between border-t border-border/70 pt-3 text-xs font-medium text-muted-foreground">
+                        <span className="truncate">{article.source}</span>
+                        <ArrowUpRight className="h-4 w-4 shrink-0 text-primary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      </div>
+                    </a>
+                  ))}
+
+                  <AquaCadastroCard />
+
+                  {restArticles.slice(2).map((article) => (
                     <a
                       key={article.id}
                       href={article.url}
@@ -225,14 +267,34 @@ function RadarDaPescaHome() {
       </main>
 
       <footer className="mt-12 border-t border-border bg-muted/40">
-        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-2 px-4 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:px-6 lg:px-8">
-          <p className="font-medium text-foreground">Radar da Pesca</p>
+        <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-3 px-4 py-6 pb-20 text-xs text-muted-foreground sm:flex-row sm:items-center sm:px-6 sm:pb-6 lg:px-8">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <p className="font-medium text-foreground">Radar da Pesca</p>
+            <a
+              href={AQUACADASTRO_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-primary hover:underline"
+            >
+              AquaCadastro
+            </a>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-primary hover:underline"
+            >
+              WhatsApp: {WHATSAPP_DISPLAY}
+            </a>
+          </div>
           <p>
             {data.isLive ? "Notícias atualizadas da internet" : "Seleção de notícias"} •{" "}
             {formatPublishedDate(data.fetchedAt)}
           </p>
         </div>
       </footer>
+
+      <WhatsAppFloatingButton />
     </div>
   );
 }
