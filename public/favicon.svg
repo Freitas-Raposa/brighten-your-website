@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Radar da Pesca">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b4f5c" />
+      <stop offset="100%" stop-color="#07323c" />
+    </linearGradient>
+    <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#ea580c" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#bg)" />
+  <circle cx="45" cy="19" r="9" fill="url(#sun)" />
+  <!-- Fisherman casting net arc -->
+  <circle cx="25" cy="21" r="3.5" fill="#ffffff" />
+  <path d="M23 26 L27 26 L29 37 L21 37 Z" fill="#ffffff" />
+  <path d="M26 28 Q37 22 47 34" fill="none" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round" />
+  <path d="M35 26 Q42 30 47 38" fill="none" stroke="#fde68a" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="2 3" />
+  <path d="M39 29 Q45 33 50 40" fill="none" stroke="#fde68a" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="2 3" />
+  <!-- Wooden fishing boat hull -->
+  <path d="M11 38 L44 38 L39 46 L16 46 Z" fill="#ffffff" />
+  <!-- River waves -->
+  <path d="M8 51 Q16 47 24 51 T40 51 T56 51" fill="none" stroke="#5eead4" stroke-width="3.2" stroke-linecap="round" />
+  <path d="M14 57 Q22 54 30 57 T46 57" fill="none" stroke="#2dd4bf" stroke-width="2.4" stroke-linecap="round" opacity="0.85" />
+</svg>
