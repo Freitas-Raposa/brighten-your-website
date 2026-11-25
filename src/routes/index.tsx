@@ -27,6 +27,7 @@ export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(fishingNewsQueryOptions),
   head: () => ({
     meta: [
+      { name: "google-site-verification", content: "jO8QfOeKJyEjBA8kYmeuCw6hogU68dMC9FAycfkpGZE" },
       { title: PAGE_TITLE },
       { name: "description", content: SITE_DESCRIPTION },
       { property: "og:title", content: PAGE_TITLE },
