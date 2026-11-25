@@ -12,11 +12,13 @@ import {
   WHATSAPP_URL,
   WhatsAppFloatingButton,
 } from "@/components/AquaCadastroPromo";
+import { DefesoRgpGuide } from "@/components/DefesoRgpGuide";
 import {
   CATEGORY_LABELS,
   CATEGORY_ORDER,
   fishingNewsQueryOptions,
   formatPublishedDate,
+  prioritizeArticles,
   type NewsCategory,
 } from "@/lib/fishing-news";
 import { HERO_IMAGE_URL, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
@@ -87,7 +89,7 @@ function RadarDaPescaHome() {
 
   const filteredArticles = useMemo(() => {
     const query = searchTerm.trim().toLowerCase();
-    return data.articles.filter((article) => {
+    const filtered = data.articles.filter((article) => {
       const matchesCategory =
         selectedCategory === "todas" || article.category === selectedCategory;
       const matchesQuery =
@@ -97,6 +99,7 @@ function RadarDaPescaHome() {
         article.source.toLowerCase().includes(query);
       return matchesCategory && matchesQuery;
     });
+    return prioritizeArticles(filtered);
   }, [data.articles, selectedCategory, searchTerm]);
 
   const featured = filteredArticles[0];
@@ -148,7 +151,7 @@ function RadarDaPescaHome() {
               Radar da Pesca
             </h1>
             <p className="mt-4 text-base leading-relaxed text-hero-foreground/85 sm:text-lg">
-              Notícias sobre pesca no Maranhão, novas portarias, defeso, rios e mar atualizadas automaticamente em um só lugar.
+              Destaque para a pesca no Maranhão, Seguro-Defeso, RGP, leis na Câmara e no Senado e notícias de pesca no Brasil e no mundo.
             </p>
           </div>
         </div>
@@ -241,7 +244,9 @@ function RadarDaPescaHome() {
             {restArticles.length > 0 && (
               <section aria-label="Mais notícias de pesca" className="mt-8">
                 <div className="mb-5 flex items-baseline justify-between gap-4">
-                  <h2 className="text-2xl font-bold text-foreground">Últimas notícias</h2>
+                  <h2 className="text-2xl font-bold text-foreground">
+                    {selectedCategory === "todas" ? "Maranhão, Brasil e Mundo" : CATEGORY_LABELS[selectedCategory]}
+                  </h2>
                   <span className="text-xs text-muted-foreground">
                     {filteredArticles.length} {filteredArticles.length === 1 ? "notícia" : "notícias"}
                   </span>
@@ -279,8 +284,16 @@ function RadarDaPescaHome() {
                   ))}
 
                   <AquaCadastroCard />
+                </div>
 
-                  {restArticles.slice(2).map((article) => (
+                <DefesoRgpGuide
+                  onFilterCongresso={() => setSelectedCategory("congresso")}
+                  onFilterSeguroDefeso={() => setSelectedCategory("seguro_defeso")}
+                />
+
+                {restArticles.length > 2 && (
+                  <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                    {restArticles.slice(2).map((article) => (
                     <a
                       key={article.id}
                       href={article.url}
@@ -309,10 +322,18 @@ function RadarDaPescaHome() {
                       </div>
                     </a>
                   ))}
-                </div>
+                  </div>
+                )}
               </section>
             )}
           </>
+        )}
+
+        {restArticles.length === 0 && (
+          <DefesoRgpGuide
+            onFilterCongresso={() => setSelectedCategory("congresso")}
+            onFilterSeguroDefeso={() => setSelectedCategory("seguro_defeso")}
+          />
         )}
       </main>
 

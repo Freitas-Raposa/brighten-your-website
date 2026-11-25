@@ -1,25 +1,51 @@
 import { queryOptions } from "@tanstack/react-query";
 import { getFishingNews } from "./fishing-news.functions";
 
-export type NewsCategory = "todas" | "esportiva" | "rios" | "mar" | "maranhao" | "legislacao";
+export type NewsCategory =
+  | "todas"
+  | "maranhao"
+  | "seguro_defeso"
+  | "congresso"
+  | "legislacao"
+  | "esportiva"
+  | "rios"
+  | "mar"
+  | "mundo";
 
 export const CATEGORY_LABELS: Record<NewsCategory, string> = {
   todas: "Todas",
   maranhao: "Maranhão",
-  legislacao: "Portarias e Defeso",
+  seguro_defeso: "Seguro-Defeso e RGP",
+  congresso: "Câmara e Senado",
+  legislacao: "Portarias",
   esportiva: "Pesca Esportiva",
   rios: "Rios e Lagos",
   mar: "Mar e Costa",
+  mundo: "Brasil e Mundo",
 };
 
 export const CATEGORY_ORDER: NewsCategory[] = [
   "todas",
   "maranhao",
+  "seguro_defeso",
+  "congresso",
   "legislacao",
   "esportiva",
   "rios",
   "mar",
+  "mundo",
 ];
+
+export function prioritizeArticles<T extends { category: string; publishedAt: string }>(
+  articles: T[],
+): T[] {
+  return [...articles].sort((a, b) => {
+    const aMaranhao = a.category === "maranhao" ? 0 : 1;
+    const bMaranhao = b.category === "maranhao" ? 0 : 1;
+    if (aMaranhao !== bMaranhao) return aMaranhao - bMaranhao;
+    return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
+  });
+}
 
 export const AUTO_REFRESH_INTERVAL_MS = 5 * 60 * 1000;
 
