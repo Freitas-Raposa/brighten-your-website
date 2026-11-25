@@ -1,13 +1,14 @@
 import { queryOptions } from "@tanstack/react-query";
 import { getFishingNews } from "./fishing-news.functions";
 
-export type NewsCategory = "todas" | "esportiva" | "rios" | "mar" | "legislacao";
+export type NewsCategory = "todas" | "esportiva" | "rios" | "mar" | "maranhao" | "legislacao";
 
 export const CATEGORY_LABELS: Record<NewsCategory, string> = {
   todas: "Todas",
   esportiva: "Pesca Esportiva",
   rios: "Rios e Lagos",
   mar: "Mar e Costa",
+  maranhao: "Maranhão",
   legislacao: "Legislação e Defeso",
 };
 
@@ -16,6 +17,7 @@ export const CATEGORY_ORDER: NewsCategory[] = [
   "esportiva",
   "rios",
   "mar",
+  "maranhao",
   "legislacao",
 ];
 

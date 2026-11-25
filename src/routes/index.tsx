@@ -90,7 +90,7 @@ function RadarDaPescaHome() {
               Radar da Pesca
             </h1>
             <p className="mt-4 text-base leading-relaxed text-hero-foreground/85 sm:text-lg">
-              As principais notícias sobre pesca esportiva, rios, mar e defeso reunidas da internet em um só lugar.
+              As principais notícias sobre pesca esportiva, rios, mar, Maranhão e defeso reunidas da internet em um só lugar.
             </p>
           </div>
         </div>

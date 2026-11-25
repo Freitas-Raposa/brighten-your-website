@@ -1,4 +1,4 @@
-export type NewsCategory = "todas" | "esportiva" | "rios" | "mar" | "legislacao";
+export type NewsCategory = "todas" | "esportiva" | "rios" | "mar" | "maranhao" | "legislacao";
 
 export interface FishingArticle {
   id: string;
@@ -20,6 +20,8 @@ const RSS_FEEDS = [
   "https://news.google.com/rss/search?q=pesca+esportiva+Brasil&hl=pt-BR&gl=BR&ceid=BR:pt-419",
   "https://news.google.com/rss/search?q=pesca+defeso+OR+piracema+Brasil&hl=pt-BR&gl=BR&ceid=BR:pt-419",
   "https://news.google.com/rss/search?q=pescaria+tucunare+OR+dourado+OR+mar+Brasil&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+  "https://news.google.com/rss/search?q=pesca+Maranh%C3%A3o&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+  "https://news.google.com/rss/search?q=defeso+Maranh%C3%A3o+pescadores&hl=pt-BR&gl=BR&ceid=BR:pt-419",
 ];
 
 function decodeEntities(text: string): string {
@@ -43,6 +45,15 @@ function extractTag(block: string, tag: string): string {
 
 function classifyCategory(text: string): Exclude<NewsCategory, "todas"> {
   const lower = text.toLowerCase();
+  if (
+    lower.includes("maranhão") ||
+    lower.includes("maranhao") ||
+    lower.includes("são luís") ||
+    lower.includes("sao luis") ||
+    lower.includes("ilha do maranhão")
+  ) {
+    return "maranhao";
+  }
   if (
     lower.includes("defeso") ||
     lower.includes("piracema") ||
@@ -163,6 +174,24 @@ const FALLBACK_ARTICLES: FishingArticle[] = [
     url: "https://news.google.com/search?q=pesca+represas+rios+Brasil&hl=pt-BR&gl=BR",
     publishedAt: new Date(Date.now() - 14 * 3600 * 1000).toISOString(),
     category: "rios",
+  },
+  {
+    id: "fallback-5",
+    title: "Defeso no Maranhão: veja as regras e as espécies protegidas no litoral e nos rios",
+    summary: "Período de proteção à reprodução dos peixes traz restrições à pesca e seguro-defeso para pescadores artesanais.",
+    source: "Radar da Pesca",
+    url: "https://news.google.com/search?q=defeso+Maranh%C3%A3o+pescadores&hl=pt-BR&gl=BR",
+    publishedAt: new Date(Date.now() - 4 * 3600 * 1000).toISOString(),
+    category: "maranhao",
+  },
+  {
+    id: "fallback-6",
+    title: "Pescadores do Maranhão acompanham calendário do seguro-defeso e fiscalização no litoral",
+    summary: "Comunidades pesqueiras de São Luís, Alcântara e região dos Lençóis se organizam para o período de defeso.",
+    source: "Radar da Pesca",
+    url: "https://news.google.com/search?q=pesca+Maranh%C3%A3o&hl=pt-BR&gl=BR",
+    publishedAt: new Date(Date.now() - 8 * 3600 * 1000).toISOString(),
+    category: "maranhao",
   },
 ];
 
