@@ -1,6 +1,7 @@
 # Roadmap
 
 - [x] Sitemap, endereço oficial (canonical), imagem de compartilhamento e dados estruturados
-- [ ] Cadastrar o site no Google Search Console (depende do usuário criar/entrar na conta e verificar o domínio)
-- [ ] Publicar as alterações para valerem em radardapesca.aquadastro.online
-- [x] AquaCadastro: manter como está (usuário decidiu focar só no interesse do site)
+- [x] Cadastrar o site no Google Search Console (conta conectada, site verificado, propriedade criada)
+- [x] Publicar as alterações para valerem em radardapesca.aquadastro.online
+- [x] Enviar a lista de páginas (sitemap) ao Google Search Console
+- [ ] Acompanhar no Search Console quando o Google terminar de ler e indexar o site
