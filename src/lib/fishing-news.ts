@@ -93,5 +93,6 @@ export function formatPublishedDate(iso: string): string {
   return new Intl.DateTimeFormat("pt-BR", {
     day: "2-digit",
     month: "short",
+    timeZone: "America/Sao_Paulo",
   }).format(date);
 }

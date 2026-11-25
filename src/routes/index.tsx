@@ -13,6 +13,8 @@ import {
   WhatsAppFloatingButton,
 } from "@/components/AquaCadastroPromo";
 import { DefesoRgpGuide } from "@/components/DefesoRgpGuide";
+import { PortariasSearch } from "@/components/PortariasSearch";
+import { portariasQueryOptions } from "@/lib/portarias-query";
 import {
   CATEGORY_LABELS,
   CATEGORY_ORDER,
@@ -29,7 +31,12 @@ const PAGE_TITLE = `${SITE_NAME} — Notícias de Pesca em um só lugar`;
 const CANONICAL_URL = `${SITE_URL}/`;
 
 export const Route = createFileRoute("/")({
-  loader: ({ context }) => context.queryClient.ensureQueryData(fishingNewsQueryOptions),
+  loader: async ({ context }) => {
+    await Promise.all([
+      context.queryClient.ensureQueryData(fishingNewsQueryOptions),
+      context.queryClient.ensureQueryData(portariasQueryOptions()),
+    ]);
+  },
   head: () => ({
     meta: [
       { name: "google-site-verification", content: "jO8QfOeKJyEjBA8kYmeuCw6hogU68dMC9FAycfkpGZE" },
@@ -167,6 +174,7 @@ function RadarDaPescaHome() {
       <AquaCadastroBanner />
 
       <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+        <PortariasSearch />
         <section aria-label="Filtros e busca" className="flex flex-col gap-4 border-b border-border pb-6 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-wrap gap-2">
             {CATEGORY_ORDER.map((category) => {

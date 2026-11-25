@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- Keep portaria matching and search-link construction in a browser-safe module; fetch indexed RSS results in server functions so searches need no AI or private browser credentials.
+- Refresh portarias on page load and every five minutes while open; show provider failures explicitly and never invent ordinances or publication dates.
+- Format news calendar dates in America/Sao_Paulo on both server and browser to prevent hydration differences.

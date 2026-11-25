@@ -157,7 +157,7 @@ export function classifyCategory(text: string): Exclude<NewsCategory, "todas"> {
   return "rios";
 }
 
-function parseRssXml(xml: string): FishingArticle[] {
+export function parseRssXml(xml: string, options: { requireValidDate?: boolean } = {}): FishingArticle[] {
   const items: FishingArticle[] = [];
   const itemMatches = xml.matchAll(/<item>([\s\S]*?)<\/item>/gi);
 
@@ -186,6 +186,7 @@ function parseRssXml(xml: string): FishingArticle[] {
         : `Matéria publicada por ${source}. Clique para ler a cobertura completa na fonte original.`;
 
     const parsedDate = pubDate ? new Date(pubDate) : new Date();
+    if (options.requireValidDate && (!pubDate || Number.isNaN(parsedDate.getTime()))) continue;
     const publishedAt = Number.isNaN(parsedDate.getTime())
       ? new Date().toISOString()
       : parsedDate.toISOString();
