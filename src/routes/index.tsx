@@ -4,6 +4,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight, RefreshCw, Search } from "lucide-react";
 import heroImage from "@/assets/radar-pesca-hero.jpg";
 import {
+  ADVERTISE_WHATSAPP_URL,
   AQUACADASTRO_URL,
   AquaCadastroBanner,
   AquaCadastroCard,
@@ -118,15 +119,25 @@ function RadarDaPescaHome() {
             <span className="font-display text-lg font-bold tracking-tight text-hero-foreground">
               Radar da Pesca
             </span>
-            <button
-              type="button"
-              onClick={() => refetch()}
-              disabled={isFetching}
-              className="inline-flex items-center gap-2 rounded-full bg-sunset px-4 py-2 text-sm font-semibold text-sunset-foreground transition-opacity hover:opacity-90 disabled:opacity-60"
-            >
-              <RefreshCw className={`h-4 w-4 ${isFetching ? "animate-spin" : ""}`} />
-              {isFetching ? "Atualizando..." : "Atualizar notícias"}
-            </button>
+            <div className="flex items-center gap-2">
+              <a
+                href={ADVERTISE_WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center rounded-full border border-hero-foreground/30 bg-hero-overlay/40 px-3.5 py-2 text-sm font-semibold text-hero-foreground backdrop-blur-sm transition-colors hover:bg-hero-overlay/65"
+              >
+                Anuncie aqui
+              </a>
+              <button
+                type="button"
+                onClick={() => refetch()}
+                disabled={isFetching}
+                className="inline-flex items-center gap-2 rounded-full bg-sunset px-4 py-2 text-sm font-semibold text-sunset-foreground transition-opacity hover:opacity-90 disabled:opacity-60"
+              >
+                <RefreshCw className={`h-4 w-4 ${isFetching ? "animate-spin" : ""}`} />
+                {isFetching ? "Atualizando..." : "Atualizar notícias"}
+              </button>
+            </div>
           </div>
 
           <div className="max-w-2xl pb-8 pt-16">
@@ -324,6 +335,14 @@ function RadarDaPescaHome() {
               className="font-medium text-primary hover:underline"
             >
               WhatsApp: {WHATSAPP_DISPLAY}
+            </a>
+            <a
+              href={ADVERTISE_WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-primary hover:underline"
+            >
+              Anuncie aqui
             </a>
           </div>
           <p>

@@ -4,6 +4,8 @@ export const AQUACADASTRO_URL = "https://aquadastro.online";
 export const WHATSAPP_DISPLAY = "(98) 99609-4477";
 export const WHATSAPP_URL =
   "https://wa.me/5598996094477?text=Ol%C3%A1%21%20Vi%20o%20AquaCadastro%20no%20Radar%20da%20Pesca%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es.";
+export const ADVERTISE_WHATSAPP_URL =
+  "https://wa.me/5598996094477?text=Ol%C3%A1%21%20Quero%20anunciar%20minha%20empresa%20no%20Radar%20da%20Pesca.";
 
 export function AquaCadastroBanner() {
   return (
