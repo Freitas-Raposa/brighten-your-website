@@ -137,7 +137,7 @@ function RadarDaPescaHome() {
               Radar da Pesca
             </h1>
             <p className="mt-4 text-base leading-relaxed text-hero-foreground/85 sm:text-lg">
-              As principais notícias sobre pesca esportiva, rios, mar, Maranhão e defeso reunidas da internet em um só lugar.
+              Notícias sobre pesca no Maranhão, novas portarias, defeso, rios e mar atualizadas automaticamente em um só lugar.
             </p>
           </div>
         </div>
@@ -327,7 +327,7 @@ function RadarDaPescaHome() {
             </a>
           </div>
           <p>
-            {data.isLive ? "Notícias atualizadas da internet" : "Seleção de notícias"} •{" "}
+            {data.isLive ? "Atualização automática a cada 5 min" : "Seleção de notícias"} •{" "}
             {formatPublishedDate(data.fetchedAt)}
           </p>
         </div>

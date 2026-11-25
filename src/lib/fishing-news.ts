@@ -5,26 +5,30 @@ export type NewsCategory = "todas" | "esportiva" | "rios" | "mar" | "maranhao" |
 
 export const CATEGORY_LABELS: Record<NewsCategory, string> = {
   todas: "Todas",
+  maranhao: "Maranhão",
+  legislacao: "Portarias e Defeso",
   esportiva: "Pesca Esportiva",
   rios: "Rios e Lagos",
   mar: "Mar e Costa",
-  maranhao: "Maranhão",
-  legislacao: "Legislação e Defeso",
 };
 
 export const CATEGORY_ORDER: NewsCategory[] = [
   "todas",
+  "maranhao",
+  "legislacao",
   "esportiva",
   "rios",
   "mar",
-  "maranhao",
-  "legislacao",
 ];
+
+export const AUTO_REFRESH_INTERVAL_MS = 5 * 60 * 1000;
 
 export const fishingNewsQueryOptions = queryOptions({
   queryKey: ["fishing-news"],
   queryFn: () => getFishingNews(),
-  staleTime: 5 * 60 * 1000,
+  staleTime: 2 * 60 * 1000,
+  refetchInterval: AUTO_REFRESH_INTERVAL_MS,
+  refetchOnWindowFocus: true,
 });
 
 export function formatPublishedDate(iso: string): string {

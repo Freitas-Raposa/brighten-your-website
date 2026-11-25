@@ -16,12 +16,15 @@ export interface FishingNewsResponse {
   isLive: boolean;
 }
 
-const RSS_FEEDS = [
+export const RSS_FEEDS = [
+  "https://news.google.com/rss/search?q=pesca+OR+pescadores+Maranh%C3%A3o&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+  "https://news.google.com/rss/search?q=defeso+OR+seguro-defeso+Maranh%C3%A3o&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+  "https://news.google.com/rss/search?q=pesca+%22S%C3%A3o+Lu%C3%ADs%22+OR+Raposa+OR+Alc%C3%A2ntara+OR+Tut%C3%B3ia+OR+%22Baixada+Maranhense%22&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+  "https://news.google.com/rss/search?q=portaria+pesca+OR+pescadores+OR+MPA+OR+IBAMA&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+  "https://news.google.com/rss/search?q=%22nova+portaria%22+OR+%22portaria+interministerial%22+pesca+OR+defeso+OR+RGP&hl=pt-BR&gl=BR&ceid=BR:pt-419",
   "https://news.google.com/rss/search?q=pesca+esportiva+Brasil&hl=pt-BR&gl=BR&ceid=BR:pt-419",
   "https://news.google.com/rss/search?q=pesca+defeso+OR+piracema+Brasil&hl=pt-BR&gl=BR&ceid=BR:pt-419",
   "https://news.google.com/rss/search?q=pescaria+tucunare+OR+dourado+OR+mar+Brasil&hl=pt-BR&gl=BR&ceid=BR:pt-419",
-  "https://news.google.com/rss/search?q=pesca+Maranh%C3%A3o&hl=pt-BR&gl=BR&ceid=BR:pt-419",
-  "https://news.google.com/rss/search?q=defeso+Maranh%C3%A3o+pescadores&hl=pt-BR&gl=BR&ceid=BR:pt-419",
 ];
 
 function decodeEntities(text: string): string {
@@ -43,26 +46,44 @@ function extractTag(block: string, tag: string): string {
   return match?.[1] ? decodeEntities(match[1]) : "";
 }
 
-function classifyCategory(text: string): Exclude<NewsCategory, "todas"> {
+export function classifyCategory(text: string): Exclude<NewsCategory, "todas"> {
   const lower = text.toLowerCase();
   if (
     lower.includes("maranhão") ||
     lower.includes("maranhao") ||
+    lower.includes("maranhense") ||
     lower.includes("são luís") ||
     lower.includes("sao luis") ||
-    lower.includes("ilha do maranhão")
+    lower.includes("ilha do maranhão") ||
+    lower.includes("raposa") ||
+    lower.includes("alcântara") ||
+    lower.includes("alcantara") ||
+    lower.includes("tutóia") ||
+    lower.includes("tutoia") ||
+    lower.includes("barreirinhas") ||
+    lower.includes("baixada maranhense") ||
+    lower.includes("cururupu") ||
+    lower.includes("carutapera")
   ) {
     return "maranhao";
   }
   if (
+    lower.includes("portaria") ||
+    lower.includes("instrução normativa") ||
+    lower.includes("instrucao normativa") ||
+    lower.includes("decreto") ||
+    lower.includes("diário oficial") ||
+    lower.includes("diario oficial") ||
+    lower.includes("ministério da pesca") ||
+    lower.includes("ministerio da pesca") ||
+    lower.includes("rgp") ||
     lower.includes("defeso") ||
     lower.includes("piracema") ||
     lower.includes("ibama") ||
     lower.includes("lei") ||
     lower.includes("licença") ||
     lower.includes("fiscalização") ||
-    lower.includes("proibida") ||
-    lower.includes("portaria")
+    lower.includes("proibida")
   ) {
     return "legislacao";
   }
@@ -199,8 +220,9 @@ export async function fetchFishingNews(): Promise<FishingNewsResponse> {
   const results = await Promise.allSettled(
     RSS_FEEDS.map(async (feedUrl) => {
       const response = await fetch(feedUrl, {
+        cache: "no-store",
         headers: {
-          "User-Agent": "RadarDaPesca/1.0 (+https://radardapesca.app)",
+          "User-Agent": "RadarDaPesca/1.0 (+https://radardapesca.aquadastro.online)",
           Accept: "application/rss+xml, application/xml, text/xml",
         },
       });
@@ -236,7 +258,7 @@ export async function fetchFishingNews(): Promise<FishingNewsResponse> {
   }
 
   return {
-    articles: merged.slice(0, 24),
+    articles: merged.slice(0, 36),
     fetchedAt: new Date().toISOString(),
     isLive: true,
   };
