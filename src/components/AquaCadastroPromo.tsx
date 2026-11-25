@@ -14,7 +14,7 @@ export function AquaCadastroBanner() {
             AquaCadastro • Gestão para Entidades de Pesca
           </p>
           <h2 className="mt-1 text-lg font-bold leading-snug sm:text-xl">
-            Automatize cadastros, mensalidades, carteirinhas e RGP da sua colônia ou sindicato.
+            Automatize cadastros, mensalidades, carteirinhas e RGP da sua colônia, sindicato ou associação.
           </h2>
         </div>
 
