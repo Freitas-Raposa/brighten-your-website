@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 
 const DEFESO_PERIODS = [
   { especie: "Peixes de água doce (rios do MA)", periodo: "1º dez a 30 mar" },
-  { especie: "Camarão (litoral)", periodo: "1º mar a 31 mai" },
+  { especie: "Camarão (litoral do MA)", periodo: "1º jan a 31 mai" },
   { especie: "Lagosta", periodo: "1º nov a 30 abr" },
   { especie: "Caranguejo-uçá (andada)", periodo: "Portaria anual" },
 ];

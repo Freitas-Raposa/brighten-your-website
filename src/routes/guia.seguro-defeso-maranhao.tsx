@@ -99,7 +99,7 @@ function GuiaSeguroDefesoPage() {
           </p>
           <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
             <li><strong>Peixes de água doce (rios do MA):</strong> referência de 1º de dezembro a 30 de março.</li>
-            <li><strong>Camarão (litoral):</strong> referência de 1º de março a 31 de maio.</li>
+            <li><strong>Camarão (litoral do MA):</strong> referência de 1º de janeiro a 31 de maio (litoral e reentrâncias maranhenses).</li>
             <li><strong>Lagosta:</strong> referência de 1º de novembro a 30 de abril.</li>
             <li><strong>Caranguejo-uçá (andada):</strong> datas definidas por portarias estaduais e federais a cada ano.</li>
           </ul>
