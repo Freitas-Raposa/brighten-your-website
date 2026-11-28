@@ -31,6 +31,13 @@ export const RSS_FEEDS = [
   "https://news.google.com/rss/search?q=pesca+defeso+OR+piracema+Brasil&hl=pt-BR&gl=BR&ceid=BR:pt-419",
   "https://news.google.com/rss/search?q=pescaria+tucunare+OR+dourado+OR+mar+Brasil&hl=pt-BR&gl=BR&ceid=BR:pt-419",
   "https://news.google.com/rss/search?q=pesca+mundial+OR+internacional+OR+FAO+OR+oceanos&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+  "https://news.google.com/rss/search?q=entrevista+seguro-defeso+pescador+artesanal+Maranh%C3%A3o&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+  "https://news.google.com/rss/search?q=agendamento+OR+convoca%C3%A7%C3%A3o+entrevista+seguro-defeso+pescador&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+  "https://news.google.com/rss/search?q=entrevista+defeso+%22Emprega+Brasil%22+OR+MTE+OR+SINE+pescador+artesanal&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+  "https://news.google.com/rss/search?q=piscicultura+OR+%22cria%C3%A7%C3%A3o+de+peixes%22+tanque+Brasil&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+  "https://news.google.com/rss/search?q=piscicultura+OR+aquicultura+Maranh%C3%A3o&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+  "https://news.google.com/rss/search?q=%22tanque-rede%22+OR+til%C3%A1pia+OR+tambaqui+cria%C3%A7%C3%A3o+Brasil&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+  "https://news.google.com/rss/search?q=pesca+artesanal+Brasil&hl=pt-BR&gl=BR&ceid=BR:pt-419",
 ];
 
 function decodeEntities(text: string): string {
@@ -54,6 +61,41 @@ function extractTag(block: string, tag: string): string {
 
 export function classifyCategory(text: string): Exclude<NewsCategory, "todas"> {
   const lower = text.toLowerCase();
+  if (
+    lower.includes("entrevista") &&
+    (lower.includes("defeso") ||
+      lower.includes("pescador") ||
+      lower.includes("seguro-defeso") ||
+      lower.includes("rgp") ||
+      lower.includes("emprega brasil"))
+  ) {
+    return "entrevistas";
+  }
+  if (
+    (lower.includes("agendamento") ||
+      lower.includes("convocação") ||
+      lower.includes("convocacao") ||
+      lower.includes("mutirão") ||
+      lower.includes("mutirao")) &&
+    (lower.includes("defeso") || lower.includes("pescador"))
+  ) {
+    return "entrevistas";
+  }
+  if (
+    lower.includes("piscicultura") ||
+    lower.includes("psicultura") ||
+    lower.includes("aquicultura") ||
+    lower.includes("tanque-rede") ||
+    lower.includes("tanque de peixe") ||
+    lower.includes("criação de peixe") ||
+    lower.includes("criacao de peixe") ||
+    lower.includes("tilápia") ||
+    lower.includes("tilapia") ||
+    lower.includes("tambaqui") ||
+    lower.includes("alevino")
+  ) {
+    return "piscicultura";
+  }
   if (
     lower.includes("maranhão") ||
     lower.includes("maranhao") ||

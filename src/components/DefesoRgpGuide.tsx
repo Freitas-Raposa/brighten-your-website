@@ -95,6 +95,15 @@ export function DefesoRgpGuide({ onFilterCongresso, onFilterSeguroDefeso }: Defe
               Dar entrada pelo MTE (Gov.br)
               <ArrowUpRight className="h-4 w-4" />
             </a>
+            <a
+              href="https://www.gov.br/pt-br/servicos/solicitar-seguro-defeso-pescador-artesanal"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
+            >
+              Entrevista do Defeso: datas e locais oficiais
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
             <Link
               to="/guia/rgp-suspenso-reativacao"
               className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"

@@ -3,8 +3,10 @@ import { getFishingNews } from "./fishing-news.functions";
 
 export type NewsCategory =
   | "todas"
+  | "entrevistas"
   | "maranhao"
   | "seguro_defeso"
+  | "piscicultura"
   | "congresso"
   | "legislacao"
   | "esportiva"
@@ -14,8 +16,10 @@ export type NewsCategory =
 
 export const CATEGORY_LABELS: Record<NewsCategory, string> = {
   todas: "Todas",
+  entrevistas: "Entrevistas do Defeso",
   maranhao: "Maranhão",
   seguro_defeso: "Seguro-Defeso e RGP",
+  piscicultura: "Piscicultura",
   congresso: "Câmara e Senado",
   legislacao: "Portarias",
   esportiva: "Pesca Esportiva",
@@ -26,8 +30,10 @@ export const CATEGORY_LABELS: Record<NewsCategory, string> = {
 
 export const CATEGORY_ORDER: NewsCategory[] = [
   "todas",
+  "entrevistas",
   "maranhao",
   "seguro_defeso",
+  "piscicultura",
   "congresso",
   "legislacao",
   "esportiva",
@@ -39,10 +45,14 @@ export const CATEGORY_ORDER: NewsCategory[] = [
 export function prioritizeArticles<T extends { category: string; publishedAt: string }>(
   articles: T[],
 ): T[] {
+  const rank = (category: string): number => {
+    if (category === "entrevistas") return 0;
+    if (category === "maranhao") return 1;
+    return 2;
+  };
   return [...articles].sort((a, b) => {
-    const aMaranhao = a.category === "maranhao" ? 0 : 1;
-    const bMaranhao = b.category === "maranhao" ? 0 : 1;
-    if (aMaranhao !== bMaranhao) return aMaranhao - bMaranhao;
+    const rankDiff = rank(a.category) - rank(b.category);
+    if (rankDiff !== 0) return rankDiff;
     return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
   });
 }

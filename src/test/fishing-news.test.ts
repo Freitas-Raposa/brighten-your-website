@@ -25,7 +25,15 @@ describe("Radar da Pesca — atualização automática, Maranhão e portarias", 
     expect(joined).toContain("senado");
     expect(joined).toContain("portaria");
     expect(joined).toContain("mundial");
-    expect(CATEGORY_ORDER.slice(0, 4)).toEqual(["todas", "maranhao", "seguro_defeso", "congresso"]);
+    expect(joined).toContain("entrevista");
+    expect(joined).toContain("piscicultura");
+    expect(CATEGORY_ORDER.slice(0, 5)).toEqual([
+      "todas",
+      "entrevistas",
+      "maranhao",
+      "seguro_defeso",
+      "piscicultura",
+    ]);
   });
 
   it("coloca notícias do Maranhão sempre em destaque antes dos outros estados", () => {
