@@ -13,6 +13,7 @@ import {
   WhatsAppFloatingButton,
 } from "@/components/AquaCadastroPromo";
 import { DefesoRgpGuide } from "@/components/DefesoRgpGuide";
+import { SiteAssistant } from "@/components/SiteAssistant";
 import { PortariasSearch } from "@/components/PortariasSearch";
 import { portariasQueryOptions } from "@/lib/portarias-query";
 import {
@@ -409,6 +410,7 @@ function RadarDaPescaHome() {
       </footer>
 
       <WhatsAppFloatingButton />
+      <SiteAssistant />
     </div>
   );
 }
