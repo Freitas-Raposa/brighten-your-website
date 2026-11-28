@@ -6,11 +6,21 @@ import {
   WHATSAPP_URL,
 } from "./AquaCadastroPromo";
 
+const HELP_WHATSAPP_URL = `https://wa.me/5598996094477?text=${encodeURIComponent(
+  "Olá! Preciso de ajuda com o Seguro-Defeso / RGP do pescador.",
+)}`;
+
+type ActionLink = {
+  label: string;
+  href: string;
+  /** true = botão verde de WhatsApp; false/ausente = botão de link normal. */
+  wa?: boolean;
+};
+
 type Answer = {
   pergunta: string;
   resposta: string;
-  /** Botão extra de ação (WhatsApp / link), além do texto. */
-  acao?: { label: string; href: string };
+  links?: ActionLink[];
 };
 
 type Topic = {
@@ -22,9 +32,108 @@ type Topic = {
 
 const TOPICS: Topic[] = [
   {
+    id: "seguro-defeso",
+    label: "Seguro-Defeso",
+    intro: "Benefício do pescador artesanal no período de defeso.",
+    perguntas: [
+      {
+        pergunta: "O que é o Seguro-Defeso?",
+        resposta:
+          "É um benefício pago ao pescador artesanal durante o período em que a pesca fica proibida (defeso), para proteger a reprodução dos peixes. O valor é de um salário mínimo por mês de defeso.",
+      },
+      {
+        pergunta: "Quem tem direito?",
+        resposta:
+          "Quem tem o RGP (carteira de pescador) ativo há pelo menos 1 ano, REAP em dia, CadÚnico atualizado, conta Gov.br prata ou ouro, exerce a pesca artesanal de forma exclusiva e não recebe outro benefício.",
+      },
+      {
+        pergunta: "Como dou entrada?",
+        resposta:
+          "Desde novembro de 2025, o pedido é feito pelo Ministério do Trabalho (MTE), na Carteira de Trabalho Digital ou no Portal Emprega Brasil — ou com apoio da sua colônia, sindicato ou associação.",
+        links: [
+          { label: "Ler o guia completo", href: "/guia/seguro-defeso-brasil" },
+          {
+            label: "Solicitar no Gov.br (MTE)",
+            href: "https://www.gov.br/pt-br/servicos/solicitar-seguro-defeso-pescador-artesanal",
+          },
+          { label: "Falar no WhatsApp", href: HELP_WHATSAPP_URL, wa: true },
+        ],
+      },
+      {
+        pergunta: "Qual é o prazo?",
+        resposta:
+          "O pedido pode ser feito de 30 dias antes até 90 dias depois do início do período de defeso.",
+      },
+      {
+        pergunta: "Quando começa o defeso?",
+        resposta:
+          "As datas mudam conforme o estado, a espécie e a bacia, e são definidas por portaria. Confira sempre a portaria da sua região — nunca confie em data repassada de boca.",
+        links: [
+          { label: "Guia nacional do Seguro-Defeso", href: "/guia/seguro-defeso-brasil" },
+          { label: "Períodos de defeso (MPA)", href: "https://www.gov.br/mpa/pt-br/assuntos/periodos-de-defeso" },
+        ],
+      },
+    ],
+  },
+  {
+    id: "entrevista",
+    label: "Entrevista do Defeso",
+    intro: "Datas, locais e como se preparar.",
+    perguntas: [
+      {
+        pergunta: "O que é a entrevista do defeso?",
+        resposta:
+          "É o atendimento (presencial ou agendado) em que o MTE confere os dados do pescador no processo do Seguro-Defeso. Faz parte da análise do benefício.",
+      },
+      {
+        pergunta: "Quando e onde é a minha?",
+        resposta:
+          "As datas e os locais saem nos canais oficiais do MTE/Gov.br e aparecem nas notícias aqui do site, na aba \"Entrevistas do Defeso\". Não confie em data repassada de boca — confirme sempre na fonte oficial.",
+        links: [
+          {
+            label: "Datas e locais oficiais (Gov.br)",
+            href: "https://www.gov.br/pt-br/servicos/solicitar-seguro-defeso-pescador-artesanal",
+          },
+        ],
+      },
+      {
+        pergunta: "Preciso de ajuda com a entrevista?",
+        resposta:
+          "Procure sua colônia, sindicato ou associação de pescadores. Se quiser, fale com a gente que ajudamos a te orientar.",
+        links: [{ label: "Falar no WhatsApp", href: HELP_WHATSAPP_URL, wa: true }],
+      },
+    ],
+  },
+  {
+    id: "rgp",
+    label: "RGP / Carteira de pescador",
+    intro: "Carteira ativa, suspensa ou reativação.",
+    perguntas: [
+      {
+        pergunta: "O que é o RGP?",
+        resposta:
+          "É o Registro Geral da Atividade Pesqueira — a carteira de pescador profissional. Ele precisa estar ativo para o pescador ter direito ao Seguro-Defeso.",
+      },
+      {
+        pergunta: "Minha carteira está suspensa. E agora?",
+        resposta:
+          "Dá para consultar e pedir a reativação no PesqBrasil/MPA. Veja o passo a passo no guia.",
+        links: [
+          { label: "Guia: RGP suspenso e reativação", href: "/guia/rgp-suspenso-reativacao" },
+          { label: "Falar no WhatsApp", href: HELP_WHATSAPP_URL, wa: true },
+        ],
+      },
+      {
+        pergunta: "Como mantenho o RGP em dia?",
+        resposta:
+          "Entregue o REAP todo ano, mantenha o CadÚnico atualizado, a biometria cadastrada e a conta Gov.br prata ou ouro.",
+      },
+    ],
+  },
+  {
     id: "aquacadastro",
     label: "Sobre o AquaCadastro",
-    intro: "O sistema de gestão para colônias, sindicatos e associações de pesca.",
+    intro: "O sistema de gestão para colônias, sindicatos e associações.",
     perguntas: [
       {
         pergunta: "O que é o AquaCadastro?",
@@ -45,7 +154,10 @@ const TOPICS: Topic[] = [
         pergunta: "Quanto custa e como contratar?",
         resposta:
           "Os planos são combinados conforme o tamanho da sua entidade. Fale com a gente no WhatsApp que explicamos tudo e mostramos o sistema funcionando.",
-        acao: { label: "Falar no WhatsApp", href: WHATSAPP_URL },
+        links: [
+          { label: "Falar no WhatsApp", href: WHATSAPP_URL, wa: true },
+          { label: "Acessar AquaCadastro", href: AQUACADASTRO_URL },
+        ],
       },
     ],
   },
@@ -68,7 +180,7 @@ const TOPICS: Topic[] = [
         pergunta: "Quanto custa anunciar?",
         resposta:
           "Os formatos e valores são combinados direto no WhatsApp, conforme o espaço e o tempo do anúncio. Chame a gente que montamos a melhor opção para você.",
-        acao: { label: "Quero anunciar (WhatsApp)", href: ADVERTISE_WHATSAPP_URL },
+        links: [{ label: "Quero anunciar (WhatsApp)", href: ADVERTISE_WHATSAPP_URL, wa: true }],
       },
     ],
   },
@@ -88,7 +200,6 @@ export function SiteAssistant() {
 
   return (
     <>
-      {/* Botão flutuante que abre o assistente (acima do botão de WhatsApp) */}
       {!open && (
         <button
           type="button"
@@ -101,7 +212,6 @@ export function SiteAssistant() {
         </button>
       )}
 
-      {/* Painel do assistente */}
       {open && (
         <div className="fixed bottom-5 right-5 z-50 flex max-h-[80vh] w-[min(92vw,22rem)] flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl">
           <header className="flex items-center justify-between gap-2 border-b border-border bg-primary px-4 py-3 text-primary-foreground">
@@ -126,12 +236,9 @@ export function SiteAssistant() {
           </header>
 
           <div className="flex-1 overflow-y-auto px-4 py-4">
-            {/* Tela 1: escolher assunto */}
             {!topic && (
               <div className="space-y-3">
-                <p className="text-sm text-muted-foreground">
-                  Olá! 👋 Sobre o que você quer saber?
-                </p>
+                <p className="text-sm text-muted-foreground">Olá! 👋 Sobre o que você quer saber?</p>
                 {TOPICS.map((t) => (
                   <button
                     key={t.id}
@@ -146,7 +253,6 @@ export function SiteAssistant() {
               </div>
             )}
 
-            {/* Tela 2: escolher pergunta */}
             {topic && !answer && (
               <div className="space-y-3">
                 <button
@@ -171,7 +277,6 @@ export function SiteAssistant() {
               </div>
             )}
 
-            {/* Tela 3: resposta */}
             {topic && answer && (
               <div className="space-y-4">
                 <button
@@ -186,27 +291,30 @@ export function SiteAssistant() {
                   <p className="text-sm font-semibold text-foreground">{answer.pergunta}</p>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{answer.resposta}</p>
                 </div>
-                {answer.acao && (
-                  <a
-                    href={answer.acao.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-whatsapp px-4 py-2.5 text-sm font-semibold text-whatsapp-foreground transition-opacity hover:opacity-90"
-                  >
-                    <MessageCircle className="h-4 w-4" />
-                    {answer.acao.label}
-                  </a>
-                )}
-                {topic.id === "aquacadastro" && (
-                  <a
-                    href={AQUACADASTRO_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex w-full items-center justify-center gap-1.5 rounded-full border border-primary px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-primary/5"
-                  >
-                    Acessar AquaCadastro
-                    <ArrowUpRight className="h-4 w-4" />
-                  </a>
+                {answer.links?.map((link) =>
+                  link.wa ? (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-whatsapp px-4 py-2.5 text-sm font-semibold text-whatsapp-foreground transition-opacity hover:opacity-90"
+                    >
+                      <MessageCircle className="h-4 w-4" />
+                      {link.label}
+                    </a>
+                  ) : (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target={link.href.startsWith("http") ? "_blank" : undefined}
+                      rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                      className="inline-flex w-full items-center justify-center gap-1.5 rounded-full border border-primary px-4 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-primary/5"
+                    >
+                      {link.label}
+                      <ArrowUpRight className="h-4 w-4" />
+                    </a>
+                  ),
                 )}
               </div>
             )}
