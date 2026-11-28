@@ -64,13 +64,22 @@ export function DefesoRgpGuide({ onFilterCongresso, onFilterSeguroDefeso }: Defe
               Normas básicas: RGP ativo há pelo menos 1 ano, REAP em dia, CadÚnico, biometria e conta Gov.br prata ou ouro. Prazo do pedido: de 30 dias antes até 90 dias depois do início do defeso.
             </p>
           </div>
-          <Link
-            to="/guia/seguro-defeso-maranhao"
-            className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
-          >
-            Ler guia completo do Seguro-Defeso no MA
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
+          <div className="mt-4 flex flex-col gap-2">
+            <Link
+              to="/guia/seguro-defeso-maranhao"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+            >
+              Ler guia completo do Seguro-Defeso no MA
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
+            <Link
+              to="/guia/seguro-defeso-brasil"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+            >
+              Guia nacional do Seguro-Defeso (Brasil)
+              <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </div>
         </div>
 
         <div className="flex flex-col justify-between rounded-xl border border-border bg-card p-5">

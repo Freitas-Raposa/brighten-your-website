@@ -5,7 +5,7 @@
 export const SITE_URL = "https://radardapesca.aquadastro.online";
 export const SITE_NAME = "Radar da Pesca";
 export const SITE_DESCRIPTION =
-  "As principais notícias sobre pesca esportiva, rios, mar, Maranhão e defeso reunidas da internet em um só lugar.";
+  "As principais notícias da pesca de todo o Brasil — Seguro-Defeso, RGP, portarias, piscicultura, pesca esportiva, rios e mar — reunidas em um só lugar, com destaque para o Maranhão.";
 
 /** Foto de capa publicada em endereço fixo, para o cartão de compartilhamento. */
 export const HERO_IMAGE_URL =

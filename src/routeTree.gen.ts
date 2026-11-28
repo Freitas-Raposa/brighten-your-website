@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ArquivoRouteImport } from './routes/arquivo'
 import { Route as GuiaRgpSuspensoReativacaoRouteImport } from './routes/guia.rgp-suspenso-reativacao'
+import { Route as GuiaSeguroDefesoBrasilRouteImport } from './routes/guia.seguro-defeso-brasil'
 import { Route as GuiaSeguroDefesoMaranhaoRouteImport } from './routes/guia.seguro-defeso-maranhao'
 
 const IndexRoute = IndexRouteImport.update({
@@ -30,6 +31,11 @@ const GuiaRgpSuspensoReativacaoRoute =
     path: '/guia/rgp-suspenso-reativacao',
     getParentRoute: () => rootRouteImport,
   } as any)
+const GuiaSeguroDefesoBrasilRoute = GuiaSeguroDefesoBrasilRouteImport.update({
+  id: '/guia/seguro-defeso-brasil',
+  path: '/guia/seguro-defeso-brasil',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GuiaSeguroDefesoMaranhaoRoute =
   GuiaSeguroDefesoMaranhaoRouteImport.update({
     id: '/guia/seguro-defeso-maranhao',
@@ -41,12 +47,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/arquivo': typeof ArquivoRoute
   '/guia/rgp-suspenso-reativacao': typeof GuiaRgpSuspensoReativacaoRoute
+  '/guia/seguro-defeso-brasil': typeof GuiaSeguroDefesoBrasilRoute
   '/guia/seguro-defeso-maranhao': typeof GuiaSeguroDefesoMaranhaoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/arquivo': typeof ArquivoRoute
   '/guia/rgp-suspenso-reativacao': typeof GuiaRgpSuspensoReativacaoRoute
+  '/guia/seguro-defeso-brasil': typeof GuiaSeguroDefesoBrasilRoute
   '/guia/seguro-defeso-maranhao': typeof GuiaSeguroDefesoMaranhaoRoute
 }
 export interface FileRoutesById {
@@ -54,6 +62,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/arquivo': typeof ArquivoRoute
   '/guia/rgp-suspenso-reativacao': typeof GuiaRgpSuspensoReativacaoRoute
+  '/guia/seguro-defeso-brasil': typeof GuiaSeguroDefesoBrasilRoute
   '/guia/seguro-defeso-maranhao': typeof GuiaSeguroDefesoMaranhaoRoute
 }
 export interface FileRouteTypes {
@@ -62,18 +71,21 @@ export interface FileRouteTypes {
     | '/'
     | '/arquivo'
     | '/guia/rgp-suspenso-reativacao'
+    | '/guia/seguro-defeso-brasil'
     | '/guia/seguro-defeso-maranhao'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/arquivo'
     | '/guia/rgp-suspenso-reativacao'
+    | '/guia/seguro-defeso-brasil'
     | '/guia/seguro-defeso-maranhao'
   id:
     | '__root__'
     | '/'
     | '/arquivo'
     | '/guia/rgp-suspenso-reativacao'
+    | '/guia/seguro-defeso-brasil'
     | '/guia/seguro-defeso-maranhao'
   fileRoutesById: FileRoutesById
 }
@@ -81,6 +93,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ArquivoRoute: typeof ArquivoRoute
   GuiaRgpSuspensoReativacaoRoute: typeof GuiaRgpSuspensoReativacaoRoute
+  GuiaSeguroDefesoBrasilRoute: typeof GuiaSeguroDefesoBrasilRoute
   GuiaSeguroDefesoMaranhaoRoute: typeof GuiaSeguroDefesoMaranhaoRoute
 }
 
@@ -107,6 +120,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuiaRgpSuspensoReativacaoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guia/seguro-defeso-brasil': {
+      id: '/guia/seguro-defeso-brasil'
+      path: '/guia/seguro-defeso-brasil'
+      fullPath: '/guia/seguro-defeso-brasil'
+      preLoaderRoute: typeof GuiaSeguroDefesoBrasilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/guia/seguro-defeso-maranhao': {
       id: '/guia/seguro-defeso-maranhao'
       path: '/guia/seguro-defeso-maranhao'
@@ -121,6 +141,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ArquivoRoute: ArquivoRoute,
   GuiaRgpSuspensoReativacaoRoute: GuiaRgpSuspensoReativacaoRoute,
+  GuiaSeguroDefesoBrasilRoute: GuiaSeguroDefesoBrasilRoute,
   GuiaSeguroDefesoMaranhaoRoute: GuiaSeguroDefesoMaranhaoRoute,
 }
 export const routeTree = rootRouteImport

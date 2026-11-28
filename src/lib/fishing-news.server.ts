@@ -38,6 +38,11 @@ export const RSS_FEEDS = [
   "https://news.google.com/rss/search?q=piscicultura+OR+aquicultura+Maranh%C3%A3o&hl=pt-BR&gl=BR&ceid=BR:pt-419",
   "https://news.google.com/rss/search?q=%22tanque-rede%22+OR+til%C3%A1pia+OR+tambaqui+cria%C3%A7%C3%A3o+Brasil&hl=pt-BR&gl=BR&ceid=BR:pt-419",
   "https://news.google.com/rss/search?q=pesca+artesanal+Brasil&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+  "https://news.google.com/rss/search?q=seguro-defeso+pescador+Brasil&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+  "https://news.google.com/rss/search?q=pesca+artesanal+Par%C3%A1+OR+Amazonas+OR+Amaz%C3%B4nia&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+  "https://news.google.com/rss/search?q=pesca+artesanal+Bahia+OR+Cear%C3%A1+OR+Pernambuco+OR+Nordeste&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+  "https://news.google.com/rss/search?q=pesca+Pantanal+OR+%22Mato+Grosso%22+OR+dourado+OR+pintado&hl=pt-BR&gl=BR&ceid=BR:pt-419",
+  "https://news.google.com/rss/search?q=pesca+%22Santa+Catarina%22+OR+%22Rio+Grande+do+Sul%22+OR+sardinha+OR+Sul&hl=pt-BR&gl=BR&ceid=BR:pt-419",
 ];
 
 function decodeEntities(text: string): string {

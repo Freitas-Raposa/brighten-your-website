@@ -165,7 +165,7 @@ function RadarDaPescaHome() {
               Radar da Pesca
             </h1>
             <p className="mt-4 text-base leading-relaxed text-hero-foreground/85 sm:text-lg">
-              Destaque para a pesca no Maranhão, Seguro-Defeso, RGP, leis na Câmara e no Senado e notícias de pesca no Brasil e no mundo.
+              Notícias da pesca de todo o Brasil — Seguro-Defeso, RGP, leis na Câmara e no Senado, piscicultura e pesca esportiva — com destaque para o Maranhão.
             </p>
           </div>
         </div>
